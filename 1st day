@@ -1,0 +1,29 @@
+Question link:- https://leetcode.com/problems/sum-root-to-leaf-numbers/description/
+
+class Solution {
+public:
+int total=0;
+void dfs(TreeNode* root,int val)
+{
+    if(root==NULL)
+    return;
+    val=10*(val)+root->val;
+    if(root->left==NULL && root->right==NULL)
+    {
+        total+=val;
+        return;
+    }
+    if(root->left!=NULL)
+    dfs(root->left,val);
+    if(root->right!=NULL)
+    dfs(root->right,val);
+}
+    int sumNumbers(TreeNode* root) {
+        int val=0;
+        if(root==NULL)
+        return 0;
+        dfs(root,val);
+        return total;
+    }
+
+};
