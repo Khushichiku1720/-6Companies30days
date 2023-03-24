@@ -1,1 +1,38 @@
-Question link:- https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/
+Question link:- https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/
+
+
+#include<bits/stdc++.h>
+class Solution {
+public:
+void DFS(int node,vector<int>adj[],vector<int>&vis,int & count)
+{
+    vis[node]=1;
+    for(auto it:adj[node])
+    {
+        if(it>=0)
+        {
+        if(vis[it]!=1)
+        {
+        count++;
+        DFS(it,adj,vis,count);
+        }
+        }
+        else
+        if(vis[-it]!=1)
+         DFS(-it,adj,vis,count);
+    }
+}
+    int minReorder(int n, vector<vector<int>>& connections) {
+        vector<int>adj[n];
+        vector<int>vis(n,0);
+        int count=0;
+        for(auto it:connections)
+        {
+            adj[it[0]].push_back(it[1]);
+            adj[it[1]].push_back(-it[0]);
+        }
+        DFS(0,adj,vis,count);
+        return count;
+    }
+};
+
