@@ -1,0 +1,32 @@
+Question link:- https://leetcode.com/problems/combination-sum/description/
+
+class Solution {
+public:
+   void rec(int index, int sum, vector<int>v, vector<vector<int>>&ans,vector<int>& candidates)
+   {
+       if(index==candidates.size() || sum<=0)
+       {
+           if(sum==0)
+           {
+               ans.push_back(v);
+               return;
+           }
+           else
+           return;
+       }
+       sum-=candidates[index];
+       v.push_back(candidates[index]);
+       rec(index,sum,v,ans,candidates);
+       sum+=candidates[index];
+       v.pop_back();
+       rec(index+1,sum,v,ans,candidates);
+   }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        int n=candidates.size(),sum=0,req;
+        vector<int>v;
+        vector<vector<int>>ans;
+        rec(0,target,v,ans,candidates);
+        return ans;
+    }
+};
